@@ -38,7 +38,7 @@ def details(request):
 
 
     except Player.DoesNotExist:
-        raise Http404("Poll does not exist")
+        raise Http404("Player does not exist")
     return render(
         request,
         'details.html',
