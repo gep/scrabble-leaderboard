@@ -1,0 +1,24 @@
+version: '2'
+services:
+  scrabble:
+    build:
+      context: .
+      dockerfile: DjangoDocker
+    image: scrabble
+    volumes:
+      - .:/usr/src/app
+#      - ./django:/usr/local/lib/python3.4/site-packages/django:ro
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8090:8000"
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3320:3306"
+    volumes:
+      - ./.mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 42
+      MYSQL_USER: scrabble
+      MYSQL_PASSWORD: localpass
+      MYSQL_DATABASE: scrabble
