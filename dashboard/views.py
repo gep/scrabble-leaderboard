@@ -12,7 +12,7 @@ def index(request):
     leaders = Player.objects\
         .annotate(avg_rating=Avg('score_player__score'), times_played=Count('score_player__id'))\
         .filter(
-            times_played__gt=2)\
+            times_played__gt=10)\
         .order_by('-avg_rating')[:10]
 
     return render(request, 'index.html', {'leaders': leaders})
